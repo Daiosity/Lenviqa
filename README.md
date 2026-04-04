@@ -4,24 +4,20 @@ Connect WordPress to modern frontends.
 
 Keep WordPress as your CMS. Upgrade your frontend to React.
 
-PressBridge helps you keep WordPress as the content system while upgrading the public frontend to React. It handles route resolution, preview flow, and safe frontend handoff without breaking normal editorial workflows.
-
-Primary value: `Same WordPress content. Better frontend.`
+PressBridge is a WordPress plugin that keeps WordPress as the CMS while React renders the frontend.
 
 ## Before vs After
-
-**Same content. Two frontends.**
-
-The WordPress version shows the default theme rendering. The PressBridge version shows the same content being rendered through React with a cleaner frontend layer.
 
 | WordPress default rendering | PressBridge React rendering |
 | --- | --- |
 | ![WordPress version](docs/images/wp-version.png) | ![PressBridge version](docs/images/pressbridge-version.png) |
 
-Caption:
+Left: WordPress default rendering  
+Right: PressBridge React rendering
 
-- Left: the default WordPress frontend rendering the page through the active theme.
-- Right: the same WordPress content resolved through PressBridge and rendered in React.
+**Same WordPress content. Better frontend.**
+
+Both views use the same WordPress content. PressBridge improves layout, structure, and frontend experience using React.
 
 Homepage screenshot:
 
@@ -31,7 +27,7 @@ Homepage screenshot:
 
 PressBridge is a WordPress plugin plus an optional React starter frontend.
 
-WordPress still manages the content, publishing workflow, previews, menus, and permalink truth. PressBridge adds the bridge layer that exposes React-friendly data, resolves WordPress routes, and hands public traffic to a modern frontend when you are ready.
+WordPress still manages the content, previews, menus, and permalink truth. PressBridge adds the plugin layer that resolves routes, exposes React-friendly data, and hands public traffic to a modern frontend when you are ready.
 
 This repository contains:
 
@@ -42,7 +38,7 @@ This repository contains:
 
 ## Why it exists
 
-WordPress is strong as a CMS, but the default frontend model can be limiting when you want a more modern UI layer. At the same time, fully headless WordPress setups often add too much complexity too early: custom routing, brittle previews, and a larger integration surface than many teams actually need.
+WordPress is strong as a CMS, but the default frontend model can be limiting when you want a more modern UI layer. Fully headless WordPress setups can also add too much complexity too early: custom routing, brittle previews, and more integration work than many teams need.
 
 PressBridge exists to simplify that bridge. It keeps WordPress where WordPress is strong and adds a safer path to a React frontend.
 
@@ -84,11 +80,8 @@ High-level flow:
 
 ### 2. Set the frontend URL
 
-For local development, use:
-
-- `http://localhost:5173`
-
-Leave route handling in WordPress mode until the frontend is rendering pages and previews correctly.
+- Use `http://localhost:5173` for local development
+- Leave route handling in WordPress mode until the frontend is rendering pages and previews correctly
 
 ### 3. Run the frontend
 
@@ -181,7 +174,7 @@ Video placeholder:
 
 Live demo behavior in this repo already shows the main idea:
 
-- the same WordPress content can be rendered through a React frontend
+- Same WordPress content. Better frontend.
 - WordPress still controls content, routing truth, and previews
 - the frontend can improve layout and UX without replacing WordPress admin
 
