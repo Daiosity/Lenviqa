@@ -15,9 +15,11 @@ PressBridge is a WordPress plugin that keeps WordPress as the CMS while React re
 Left: WordPress default rendering  
 Right: PressBridge React rendering
 
-**Same WordPress content. Better frontend.**
+Same content. Two frontends.
 
 Both views use the same WordPress content. PressBridge improves layout, structure, and frontend experience using React.
+
+**Same WordPress content. Better frontend.**
 
 Homepage screenshot:
 
@@ -70,20 +72,25 @@ High-level flow:
 - React starter export
 - Gutenberg-aware content rendering with safe fallback for unsupported blocks
 
+## How PressBridge is different
+
+Typical headless WordPress setups often mean:
+
+- custom setup
+- brittle preview flow
+- routing logic spread across the frontend
+
+PressBridge takes a more practical path:
+
+- plugin-based bridge layer
+- safe fallback behavior
+- easier adoption for real editorial sites
+
 ## Quick Start
 
-### 1. Install the plugin
-
-- Install the plugin in WordPress
-- Activate `PressBridge`
-- Open `Settings > PressBridge`
-
-### 2. Set the frontend URL
-
-- Use `http://localhost:5173` for local development
-- Leave route handling in WordPress mode until the frontend is rendering pages and previews correctly
-
-### 3. Run the frontend
+1. Install and activate `PressBridge` in WordPress.
+2. Open `Settings > PressBridge` and set the frontend URL to `http://localhost:5173`.
+3. Run the frontend:
 
 For the normal React dev flow:
 
@@ -100,21 +107,13 @@ cd frontend-lite
 python server.py
 ```
 
-### 4. Test the bridge
-
-Check these first:
+4. Test the bridge:
 
 - `http://pressbridge.local/wp-json/pressbridge/v1/site`
 - `http://pressbridge.local/wp-json/pressbridge/v1/resolve?path=/`
 - `http://localhost:5173/`
 
-### 5. Enable handoff when ready
-
-Once the frontend is rendering routes correctly:
-
-- enable headless mode
-- switch route handling to redirect mode
-- verify logged-out public traffic is handed to React
+5. When routes are rendering correctly, enable headless mode and switch route handling to redirect mode.
 
 ## Architecture Overview
 
@@ -189,20 +188,6 @@ Live demo behavior in this repo already shows the main idea:
 - Teams looking for a no-code site builder
 - Projects that need full WordPress theme parity out of the box
 - Teams expecting WooCommerce, ACF, or SSR support today
-
-## How PressBridge is different
-
-Typical headless WordPress setups often mean:
-
-- custom setup
-- brittle preview flow
-- routing logic spread across the frontend
-
-PressBridge takes a more practical path:
-
-- plugin-based bridge layer
-- safe fallback behavior
-- easier adoption for real editorial sites
 
 ## Supporting Docs
 
