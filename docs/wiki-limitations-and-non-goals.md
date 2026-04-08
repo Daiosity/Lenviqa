@@ -21,4 +21,8 @@ Some areas are beta-safe with caveats:
 
 These boundaries are intentional. The current goal of core is reliable bridge behavior, honest fallback behavior, and a usable starter foundation.
 
-For the validated core boundary, see [beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\beta-scope.md).
+Related pages:
+
+- [Supported Beta Scope](wiki-supported-beta-scope.md)
+- [Validation and Scenario Guardrails](wiki-validation-and-scenario-guardrails.md)
+- [What Is PressBridge](wiki-what-is-pressbridge.md)

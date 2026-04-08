@@ -602,7 +602,9 @@ function PreviewBanner({ content, currentPath }) {
       <p className="eyebrow">Preview mode</p>
       <h2>Signed WordPress preview</h2>
       <p className="lede">{preview.source_label || "You are looking at a temporary preview being served directly from WordPress."}</p>
-      <p className="meta-row">Preview URL: <strong>{currentPath === publishedPath ? `${publishedPath}?wtr_preview_token=...` : currentPath}</strong></p>
+      <p className="inline-note">
+        Preview content is intentionally temporary and does not change the published public route.
+      </p>
       <div className="action-row"><Link className="button-link" to={publishedPath}>Open published route</Link></div>
     </section>
   );

@@ -24,4 +24,8 @@ It is not a promise of:
 - WooCommerce as a solved core feature
 - builder/plugin ecosystem compatibility
 
-For the current beta boundary, see [beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\beta-scope.md).
+Next:
+
+- [Quick Start](wiki-quick-start.md)
+- [Supported Beta Scope](wiki-supported-beta-scope.md)
+- [Limitations and Non-Goals](wiki-limitations-and-non-goals.md)

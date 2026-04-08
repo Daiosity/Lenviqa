@@ -39,4 +39,8 @@ For core validation:
 powershell -ExecutionPolicy Bypass -File .\scripts\validate-core.ps1 -FrontendBase 'http://127.0.0.1:5173'
 ```
 
-For a fuller first-run flow, see [first-time-onboarding.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\first-time-onboarding.md) and [local-dev.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\local-dev.md).
+Next:
+
+- [What Is PressBridge](wiki-what-is-pressbridge.md)
+- [Supported Beta Scope](wiki-supported-beta-scope.md)
+- [Limitations and Non-Goals](wiki-limitations-and-non-goals.md)

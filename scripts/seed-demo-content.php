@@ -71,11 +71,16 @@ function pressbridge_demo_get_home_url( mysqli $mysqli ) {
 	return $home_url;
 }
 
-function pressbridge_demo_image_uri( $title, $accent = '#2563eb', $background = '#eef4ff', $background_alt = '#dbeafe' ) {
+function pressbridge_demo_image_uri( $title, $accent = '#2563eb', $background = '#eef4ff', $background_alt = '#dbeafe', $show_title = true ) {
 	$title          = htmlspecialchars( $title, ENT_QUOTES );
 	$accent         = htmlspecialchars( $accent, ENT_QUOTES );
 	$background     = htmlspecialchars( $background, ENT_QUOTES );
 	$background_alt = htmlspecialchars( $background_alt, ENT_QUOTES );
+	$title_markup   = '';
+
+	if ( $show_title && '' !== $title ) {
+		$title_markup = '<text x="230" y="640" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">' . $title . '</text>';
+	}
 
 	$svg = <<<SVG
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-label="{$title}">
@@ -101,7 +106,7 @@ function pressbridge_demo_image_uri( $title, $accent = '#2563eb', $background = 
   <rect x="630" y="378" width="390" height="18" rx="9" fill="#475569" opacity="0.32" />
   <rect x="630" y="452" width="190" height="56" rx="18" fill="{$accent}" />
   <rect x="840" y="452" width="170" height="56" rx="18" fill="transparent" stroke="{$accent}" stroke-width="4" />
-  <text x="230" y="640" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">{$title}</text>
+  {$title_markup}
 </svg>
 SVG;
 
@@ -276,20 +281,20 @@ function pressbridge_demo_upsert_transient( mysqli $mysqli, $token, array $paylo
 $mysqli   = pressbridge_demo_connect_local_db();
 $home_url = pressbridge_demo_get_home_url( $mysqli );
 
-$layout_image = pressbridge_demo_image_uri( 'Content + Layout', '#2563eb', '#eff6ff', '#dbeafe' );
-$cover_image  = pressbridge_demo_image_uri( 'Preview + Routing', '#0f766e', '#ecfeff', '#ccfbf1' );
-$media_image  = pressbridge_demo_image_uri( 'Editorial Flow', '#7c3aed', '#f5f3ff', '#ede9fe' );
+$layout_image = pressbridge_demo_image_uri( 'Content + Layout', '#2563eb', '#eff6ff', '#dbeafe', false );
+$cover_image  = pressbridge_demo_image_uri( 'Preview + Routing', '#0f766e', '#d9f3f1', '#b7e7e3', false );
+$media_image  = pressbridge_demo_image_uri( 'Editorial Flow', '#7c3aed', '#f5f3ff', '#ede9fe', false );
 
 $demo_layout_content = strtr(
 	<<<'HTML'
 <!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"blockGap":"32px"}}} -->
-<div class="wp-block-group"><!-- wp:cover {"url":"__COVER__","dimRatio":50,"overlayColor":"contrast","minHeight":320,"isDark":true} -->
+<div class="wp-block-group"><!-- wp:cover {"url":"__COVER__","dimRatio":78,"overlayColor":"contrast","minHeight":320,"isDark":true} -->
 <div class="wp-block-cover is-dark" style="min-height:320px"><span aria-hidden="true" class="wp-block-cover__background has-contrast-background-color has-background-dim"></span><img class="wp-block-cover__image-background" alt="PressBridge cover example" src="__COVER__" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">A cleaner Gutenberg layout rendered through React</h1>
+<h1 class="wp-block-heading">A readable Gutenberg layout carried into React</h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>This page is designed for screenshots. It combines a cover section, nested groups, columns, media-text, and buttons in a way that is readable and intentional.</p>
+<p>This demo combines a cover, nested groups, columns, media-text, and buttons in a way that stays readable without depending on theme-specific frontend CSS.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"left"}} -->
@@ -303,8 +308,8 @@ $demo_layout_content = strtr(
 <!-- /wp:buttons --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:group {"style":{"spacing":{"padding":{"top":"24px","right":"24px","bottom":"24px","left":"24px"},"blockGap":"24px"},"color":{"background":"#f8fbff"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group has-background" style="background-color:#f8fbff;padding-top:24px;padding-right:24px;padding-bottom:24px;padding-left:24px"><!-- wp:columns {"verticalAlignment":"center"} -->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"28px","right":"28px","bottom":"28px","left":"28px"},"blockGap":"24px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group" style="padding-top:28px;padding-right:28px;padding-bottom:28px;padding-left:28px"><!-- wp:columns {"verticalAlignment":"center"} -->
 <div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"38%"} -->
 <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:38%"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
 <figure class="wp-block-image size-large"><img src="__LAYOUT__" alt="Abstract layout illustration"/></figure>
@@ -313,17 +318,17 @@ $demo_layout_content = strtr(
 
 <!-- wp:column {"verticalAlignment":"center","width":"62%"} -->
 <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:62%"><!-- wp:heading {"level":2} -->
-<h2 class="wp-block-heading">Layout intent matters more than perfect parity</h2>
+<h2 class="wp-block-heading">Layout intent matters more than theme cloning</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>PressBridge is not trying to clone an active WordPress theme. The goal is to preserve structure, hierarchy, and editorial meaning while giving React control over the frontend.</p>
+<p>PressBridge keeps the structure, hierarchy, and editorial meaning of the WordPress content while letting React own the public presentation layer.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:media-text {"mediaPosition":"right","mediaWidth":38,"isStackedOnMobile":true} -->
 <div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="grid-template-columns:auto 38%"><figure class="wp-block-media-text__media"><img src="__MEDIA__" alt="Editorial workflow illustration"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->
-<p>Media-text, grouped content, and clear calls to action should remain readable even when the React layer uses safe fallback behavior to avoid structural breakage.</p>
+<p>Grouped content, media-text, and clear calls to action should remain readable even when the frontend uses safe fallback behavior to avoid structural breakage.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
@@ -335,6 +340,9 @@ $demo_layout_content = strtr(
 <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/pb-demo-simple-page/">Open the simple page</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div></div>
+<!-- wp:paragraph -->
+<p>This is the beta-core promise in one route: common layouts should hold together clearly, even when the final React styling does not try to mimic the active WordPress theme.</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:media-text --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
@@ -381,11 +389,7 @@ HTML;
 
 $simple_page_content = <<<'HTML'
 <!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"blockGap":"18px"}}} -->
-<div class="wp-block-group"><!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">A simple WordPress page rendered through PressBridge</h1>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
+<div class="wp-block-group"><!-- wp:paragraph -->
 <p>This route is intentionally minimal. It is useful for baseline screenshots and for explaining the difference between normal WordPress page rendering and the React frontend result.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
@@ -430,7 +434,7 @@ $demo_pages = array(
 		'post_name'    => 'getting-started',
 		'post_excerpt' => 'Nested route demo page.',
 		'post_status'  => 'publish',
-		'post_content' => '<h1>Getting Started with PressBridge</h1><p>This nested route exists to show that the frontend does not have to guess WordPress permalink truth.</p>',
+		'post_content' => '<p>This nested route exists to show that the frontend does not have to guess WordPress permalink truth.</p><p>The page title comes from WordPress route resolution, while the body content stays clean and non-duplicated for screenshots.</p>',
 		'post_parent'  => $parent_page_id,
 		'path'         => 'pb-demo-guides/getting-started/',
 	),
@@ -469,7 +473,7 @@ $post_id = pressbridge_demo_upsert_content(
 		'post_name'    => 'pressbridge-demo-post',
 		'post_excerpt' => 'Simple post example for baseline route screenshots.',
 		'post_status'  => 'publish',
-		'post_content' => '<h1>Shipping a React Frontend from WordPress</h1><p>This demo post exists so the repo can show a simple post route rendered through the PressBridge starter.</p>',
+		'post_content' => '<p>This demo post exists so the repo can show a simple post route rendered through the PressBridge starter.</p><p>It is intentionally light on structure so the screenshot reads as a normal content route instead of another special demo page.</p>',
 		'path'         => 'pressbridge-demo-post/',
 	),
 	$home_url

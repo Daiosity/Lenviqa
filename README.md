@@ -22,7 +22,7 @@ That means the current public promise is limited to the validated core scope:
 - preview guardrails
 - packaging/install/runtime validation
 
-See [beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\beta-scope.md) for the validated boundary and [release-notes-v0.2.0.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\release-notes-v0.2.0.md) for the first beta release notes.
+See [Beta scope](docs/beta-scope.md) for the validated boundary and [v0.2.0 release notes](docs/release-notes-v0.2.0.md) for the first beta release notes.
 
 ## Who This Is For
 
@@ -92,16 +92,16 @@ Caption:
 
 ### Normal WordPress pages and posts still resolve cleanly through the bridge.
 
-![Simple page or post baseline example](docs/assets/screenshots/simple-page.png)
+![Simple post baseline example](docs/assets/screenshots/simple-post.png)
 
 Caption:
 - Normal WordPress pages and posts still resolve cleanly through the bridge.
 
-The exact capture plan lives in [repo-screenshot-plan.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\repo-screenshot-plan.md).
+The exact capture plan lives in [Repo screenshot plan](docs/repo-screenshot-plan.md).
 
 ## What Core Currently Handles
 
-The current beta-safe boundary is defined in [beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\beta-scope.md).
+The current beta-safe boundary is defined in [Beta scope](docs/beta-scope.md).
 
 In practical terms, core currently handles:
 
@@ -174,20 +174,31 @@ python server.py
 
 ## Supporting Docs
 
-- [beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\beta-scope.md)
-- [release-notes-v0.2.0.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\release-notes-v0.2.0.md)
-- [repo-screenshot-plan.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\repo-screenshot-plan.md)
-- [route-scenario-matrix.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\route-scenario-matrix.md)
-- [gutenberg-scenario-matrix.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\gutenberg-scenario-matrix.md)
-- [preview-scenario-matrix.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\preview-scenario-matrix.md)
-- [packaging-install-confidence.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\packaging-install-confidence.md)
-- [wiki-plan.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\wiki-plan.md)
-- [wiki-what-is-pressbridge.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\wiki-what-is-pressbridge.md)
-- [wiki-quick-start.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\wiki-quick-start.md)
-- [wiki-supported-beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\wiki-supported-beta-scope.md)
-- [wiki-limitations-and-non-goals.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\wiki-limitations-and-non-goals.md)
-- [public-announcement-drafts-v0.2.0.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\public-announcement-drafts-v0.2.0.md)
-- [first-time-onboarding.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\first-time-onboarding.md)
-- [local-dev.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\local-dev.md)
-- [core-roadmap.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\core-roadmap.md)
-- [current-feature-status.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\current-feature-status.md)
+### Release and scope
+
+- [Beta scope](docs/beta-scope.md)
+- [v0.2.0 release notes](docs/release-notes-v0.2.0.md)
+- [Current feature status](docs/current-feature-status.md)
+- [Core roadmap](docs/core-roadmap.md)
+
+### Validation and proof
+
+- [Repo screenshot plan](docs/repo-screenshot-plan.md)
+- [Route scenario matrix](docs/route-scenario-matrix.md)
+- [Gutenberg scenario matrix](docs/gutenberg-scenario-matrix.md)
+- [Preview scenario matrix](docs/preview-scenario-matrix.md)
+- [Packaging and install confidence](docs/packaging-install-confidence.md)
+
+### Onboarding and wiki
+
+- [First-time onboarding](docs/first-time-onboarding.md)
+- [Local development](docs/local-dev.md)
+- [Wiki plan](docs/wiki-plan.md)
+- [Wiki: What is PressBridge](docs/wiki-what-is-pressbridge.md)
+- [Wiki: Quick start](docs/wiki-quick-start.md)
+- [Wiki: Supported beta scope](docs/wiki-supported-beta-scope.md)
+- [Wiki: Limitations and non-goals](docs/wiki-limitations-and-non-goals.md)
+
+### Release communication
+
+- [Public announcement drafts](docs/public-announcement-drafts-v0.2.0.md)

@@ -33,10 +33,8 @@ This is not a promise of universal WordPress frontend parity.
 
 Use these docs as the detailed scope boundary:
 
-- [beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\beta-scope.md)
-- [route-scenario-matrix.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\route-scenario-matrix.md)
-- [gutenberg-scenario-matrix.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\gutenberg-scenario-matrix.md)
-- [preview-scenario-matrix.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\preview-scenario-matrix.md)
-- [packaging-install-confidence.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\packaging-install-confidence.md)
+- [Validation and Scenario Guardrails](wiki-validation-and-scenario-guardrails.md)
+- [Limitations and Non-Goals](wiki-limitations-and-non-goals.md)
+- [Quick Start](wiki-quick-start.md)
 
-For the higher-level product boundary, see [beta-scope.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\beta-scope.md).
+For the higher-level product boundary, see [What Is PressBridge](wiki-what-is-pressbridge.md).

@@ -63,24 +63,26 @@ Recommended capture order:
 5. nested route example
 6. simple page or post baseline
 
-That order keeps the capture session fast and makes it easy to reuse the layout demo page for both the comparison shot and the Gutenberg layout shot.
+That order keeps the capture session fast while separating the calm comparison shot from the heavier Gutenberg layout shot.
 
 ## Screenshot 1: WordPress To React Rendering Comparison
 
 - WordPress URL:
-  - `http://wp-to-react.local/pb-demo-layout/`
+  - `http://wp-to-react.local/pb-demo-simple-page/`
 - Frontend URL:
-  - `http://localhost:5173/pb-demo-layout/`
+  - `http://localhost:5173/pb-demo-simple-page/`
 - What to show in frame:
   - the WordPress-rendered page on one side
   - the React frontend route on the other
-  - enough of the cover, grouped content, and buttons to show the same source content rendered through two frontends
+  - the same simple heading and body copy on both sides
+  - enough shell on the React side to show this is a starter frontend, not a raw page dump
 - Crop out:
   - browser bookmarks
   - unrelated desktop UI
 - Expected good result:
   - it is obvious that both sides are the same page content
   - the React side looks like a cleaner frontend presentation, not a different CMS
+  - the screenshot reads quickly without heavy layout noise
 - Final caption:
   - `Same content. Two frontends.`
 - Why it helps:
@@ -116,6 +118,7 @@ That order keeps the capture session fast and makes it easy to reuse the layout 
 - What to show in frame:
   - the browser path
   - the page title `Getting Started with PressBridge`
+  - the body copy beneath it without a duplicated in-content H1
   - enough surrounding shell to show the route is resolved normally by the starter
 - Crop out:
   - unrelated browser tabs
@@ -168,26 +171,22 @@ That order keeps the capture session fast and makes it easy to reuse the layout 
 - Why it helps:
   - it shows real starting value for developers evaluating the repo
 
-## Screenshot 6: Simple Page Or Post Baseline
+## Screenshot 6: Simple Post Baseline
 
 - WordPress URL:
-  - page:
-    - `http://wp-to-react.local/wp-admin/post.php?post=28&action=edit`
   - post:
     - `http://wp-to-react.local/wp-admin/post.php?post=29&action=edit`
 - Frontend URL:
-  - page:
-    - `http://localhost:5173/pb-demo-simple-page/`
   - post:
     - `http://localhost:5173/pressbridge-demo-post/`
 - What to show in frame:
-  - one very simple route with just a heading and short body copy
-  - use whichever reads more clearly in the current starter shell
+  - the simple post route with a heading and short body copy
+  - enough shell to make it obvious this is a normal content route, not a special demo page
 - Crop out:
   - unnecessary empty space
 - Expected good result:
   - the route looks calm and baseline-correct
-  - this gives the README a simple example alongside the more complex layout shot
+  - this gives the README a simple post example alongside the heavier layout and route shots
 - Final caption:
   - `Normal WordPress pages and posts still resolve cleanly through the bridge.`
 - Why it helps:

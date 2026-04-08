@@ -949,21 +949,6 @@ function CompatibilityNotice({ content }) {
   );
 }
 
-function formatPreviewTime(value) {
-  if (!value) {
-    return "";
-  }
-
-  try {
-    return new Intl.DateTimeFormat(undefined, {
-      dateStyle: "medium",
-      timeStyle: "short"
-    }).format(new Date(value));
-  } catch (error) {
-    return value;
-  }
-}
-
 function PreviewBanner({ content, currentPath }) {
   if (!content?.is_preview) {
     return null;
@@ -971,8 +956,6 @@ function PreviewBanner({ content, currentPath }) {
 
   const preview = content.preview || {};
   const publishedPath = preview.canonical_path || content.path || "/";
-  const previewModePath =
-    currentPath === publishedPath ? `${publishedPath}?wtr_preview_token=...` : currentPath;
 
   return (
     <section className="content-card preview-card">
@@ -982,14 +965,9 @@ function PreviewBanner({ content, currentPath }) {
         {preview.source_label ||
           "You are looking at a temporary preview being served directly from WordPress."}
       </p>
-      <p className="meta-row">
-        Preview URL: <strong>{previewModePath}</strong>
+      <p className="inline-note">
+        Preview content is intentionally temporary and does not change the published public route.
       </p>
-      {preview.token_expires_at ? (
-        <p className="meta-row">
-          Link expires: <strong>{formatPreviewTime(preview.token_expires_at)}</strong>
-        </p>
-      ) : null}
       <div className="action-row">
         <Link className="button-link" to={publishedPath}>
           Open published route
