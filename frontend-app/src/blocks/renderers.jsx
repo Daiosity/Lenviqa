@@ -146,6 +146,33 @@ function isMediaCardGroup(block) {
   );
 }
 
+function hasRenderableContentBlocks(blocks = []) {
+  return blocks.some((item) => {
+    if (!item) {
+      return false;
+    }
+
+    if (["core/group", "core/column"].includes(item.name)) {
+      return hasRenderableContentBlocks(item.inner_blocks || []);
+    }
+
+    if (item.name === "core/image") {
+      return Boolean(getImageData(item).url);
+    }
+
+    if (item.name === "core/button") {
+      const button = getButtonData(item);
+      return Boolean(button.url && button.text);
+    }
+
+    return Boolean(getBlockHtml(item).trim());
+  });
+}
+
+function getRenderableGalleryBlocks(block) {
+  return (block?.inner_blocks || []).filter((item) => Boolean(getImageData(item).url));
+}
+
 function getGroupLayoutParts(block) {
   const blocks = block?.inner_blocks || [];
   const layout = block?.attrs?.layout || {};
@@ -218,12 +245,17 @@ function ImageRenderer({ block }) {
 
 function GalleryRenderer({ block, renderBlocks }) {
   const fallbackItems = getGalleryItems(block);
+  const renderableBlocks = getRenderableGalleryBlocks(block);
 
   if (!block?.inner_blocks?.length && !fallbackItems.length) {
     return <HtmlRenderer block={block} />;
   }
 
-  if (!block?.inner_blocks?.length && fallbackItems.length) {
+  const shouldPreferFallbackGallery =
+    fallbackItems.length > 0 &&
+    (!renderableBlocks.length || fallbackItems.length >= (block?.inner_blocks?.length || 0));
+
+  if (shouldPreferFallbackGallery) {
     return (
       <Grid
         className={blockClasses(block, "pressbridge-gallery")}
@@ -258,6 +290,7 @@ function GalleryRenderer({ block, renderBlocks }) {
 
 function MediaTextRenderer({ block, renderBlocks }) {
   const media = getMediaTextData(block);
+  const hasRenderableInnerBlocks = hasRenderableContentBlocks(block?.inner_blocks || []);
 
   if (!media.mediaUrl) {
     return <HtmlRenderer block={block} />;
@@ -285,7 +318,7 @@ function MediaTextRenderer({ block, renderBlocks }) {
         )}
       </Container>
       <Container className="pressbridge-media-text__content">
-        {block?.inner_blocks?.length ? (
+        {hasRenderableInnerBlocks ? (
           renderBlocks(block.inner_blocks)
         ) : media.contentHtml ? (
           <RichText className="pressbridge-html-block" html={media.contentHtml} />
@@ -358,6 +391,14 @@ function ColumnRenderer({ block, renderBlocks }) {
 
 function ButtonsRenderer({ block, renderBlocks }) {
   const fallbackButtons = getButtonsData(block);
+  const hasRenderableInnerButtons = (block?.inner_blocks || []).some((item) => {
+    if (item?.name !== "core/button") {
+      return false;
+    }
+
+    const button = getButtonData(item);
+    return Boolean(button.url && button.text);
+  });
 
   if (!block?.inner_blocks?.length && !fallbackButtons.buttons.length) {
     return <HtmlRenderer block={block} />;
@@ -371,7 +412,7 @@ function ButtonsRenderer({ block, renderBlocks }) {
     .join(" ");
   const style = fallbackButtons.justifyContent ? { justifyContent: fallbackButtons.justifyContent } : undefined;
 
-  if (!block?.inner_blocks?.length && fallbackButtons.buttons.length) {
+  if ((!hasRenderableInnerButtons || !block?.inner_blocks?.length) && fallbackButtons.buttons.length) {
     return (
       <ButtonGroup className={classNames} style={style}>
         {fallbackButtons.buttons.map((button) => (
@@ -426,6 +467,7 @@ function QuoteRenderer({ block }) {
 function CoverRenderer({ block, renderBlocks }) {
   const style = getCoverStyle(block);
   const cover = getCoverData(block);
+  const hasRenderableInnerBlocks = hasRenderableContentBlocks(block?.inner_blocks || []);
 
   if (!block?.inner_blocks?.length && !style.backgroundImage && !cover.backgroundVideo && !cover.contentHtml) {
     return <HtmlRenderer block={block} />;
@@ -446,7 +488,7 @@ function CoverRenderer({ block, renderBlocks }) {
       ) : null}
       <span className="pressbridge-cover__overlay" style={getCoverOverlayStyle({ attrs: cover })} aria-hidden="true" />
       <Container className="pressbridge-cover__content">
-        {block?.inner_blocks?.length ? (
+        {hasRenderableInnerBlocks ? (
           renderBlocks(block.inner_blocks)
         ) : cover.contentHtml ? (
           <RichText className="pressbridge-html-block" html={cover.contentHtml} />
