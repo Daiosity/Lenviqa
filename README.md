@@ -19,9 +19,11 @@ Same content. Two frontends.
 
 Both views use the same WordPress content. PressBridge improves layout, structure, and frontend experience using React.
 
+These screenshots use the repo's local `Test Page` route so the comparison stays grounded in the actual starter workflow.
+
 **Same WordPress content. Better frontend.**
 
-Homepage screenshot:
+Starter homepage:
 
 ![PressBridge homepage](docs/images/pressbridge-home.png)
 
@@ -165,7 +167,8 @@ Planned or likely next areas, not promises:
 
 - Gutenberg mapping improvements
 - Elementor support
-- WooCommerce compatibility layer
+- WooCommerce compatibility layer for shortcode-heavy store routes
+- Stronger Woo cart and checkout experience once the frontend and store can share the right domain/session setup
 
 ## Demo
 
