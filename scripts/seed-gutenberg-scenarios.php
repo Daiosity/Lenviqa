@@ -6,6 +6,44 @@
  * the CLI runtime does not bootstrap WordPress the same way the Local web stack does.
  */
 
+function pressbridge_scenario_image_uri( $title, $accent = '#3b82f6', $background = '#eef4ff', $background_alt = '#dbeafe' ) {
+	$title      = htmlspecialchars( $title, ENT_QUOTES );
+	$accent     = htmlspecialchars( $accent, ENT_QUOTES );
+	$background = htmlspecialchars( $background, ENT_QUOTES );
+	$background_alt = htmlspecialchars( $background_alt, ENT_QUOTES );
+
+	$svg = <<<SVG
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="{$title}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="{$background}" />
+      <stop offset="100%" stop-color="{$background_alt}" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.92)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.66)" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)" />
+  <circle cx="180" cy="180" r="140" fill="{$accent}" opacity="0.18" />
+  <circle cx="1030" cy="130" r="90" fill="{$accent}" opacity="0.14" />
+  <circle cx="930" cy="710" r="170" fill="{$accent}" opacity="0.12" />
+  <rect x="120" y="130" width="960" height="640" rx="36" fill="url(#panel)" stroke="rgba(15,23,42,0.08)" />
+  <rect x="180" y="220" width="320" height="220" rx="24" fill="{$accent}" opacity="0.16" />
+  <rect x="550" y="220" width="350" height="32" rx="16" fill="#0f172a" opacity="0.8" />
+  <rect x="550" y="276" width="250" height="22" rx="11" fill="#334155" opacity="0.72" />
+  <rect x="550" y="328" width="410" height="18" rx="9" fill="#475569" opacity="0.48" />
+  <rect x="550" y="364" width="390" height="18" rx="9" fill="#475569" opacity="0.38" />
+  <rect x="550" y="400" width="340" height="18" rx="9" fill="#475569" opacity="0.28" />
+  <rect x="550" y="474" width="180" height="54" rx="18" fill="{$accent}" />
+  <rect x="750" y="474" width="160" height="54" rx="18" fill="transparent" stroke="{$accent}" stroke-width="4" />
+  <text x="180" y="625" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">{$title}</text>
+</svg>
+SVG;
+
+	return 'data:image/svg+xml;utf8,' . rawurlencode( $svg );
+}
+
 $pages = array(
 	array(
 		'post_title'   => 'PB Scenario Nested Layout',
@@ -173,6 +211,21 @@ HTML,
 	),
 );
 
+$image_map = array(
+	'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80' => pressbridge_scenario_image_uri( 'Nested Columns', '#2563eb', '#eff6ff', '#dbeafe' ),
+	'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80' => pressbridge_scenario_image_uri( 'Media Text', '#7c3aed', '#f5f3ff', '#ede9fe' ),
+	'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80' => pressbridge_scenario_image_uri( 'Cover CTA', '#0f766e', '#ecfeff', '#cffafe' ),
+	'https://images.unsplash.com/photo-1515879218367-8466d9108023?auto=format&fit=crop&w=900&q=80'  => pressbridge_scenario_image_uri( 'Gallery One', '#ea580c', '#fff7ed', '#fed7aa' ),
+	'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80'  => pressbridge_scenario_image_uri( 'Gallery Two', '#0891b2', '#ecfeff', '#bae6fd' ),
+	'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80'   => pressbridge_scenario_image_uri( 'Gallery Three', '#9333ea', '#faf5ff', '#e9d5ff' ),
+	'https://images.unsplash.com/photo-1516321310764-8d3d0e1c7b2f?auto=format&fit=crop&w=1000&q=80'  => pressbridge_scenario_image_uri( 'Mixed Layout', '#1d4ed8', '#eff6ff', '#bfdbfe' ),
+);
+
+foreach ( $pages as &$page ) {
+	$page['post_content'] = strtr( $page['post_content'], $image_map );
+}
+unset( $page );
+
 function pressbridge_scenario_seed_via_db( array $pages ) {
 	$sitesFile = getenv( 'APPDATA' ) . '/Local/sites.json';
 
@@ -278,7 +331,7 @@ function pressbridge_scenario_seed_via_db( array $pages ) {
 		}
 
 		if ( $existingId ) {
-			$updateStmt->bind_param( 'sssssssi', $now, $now, $content, $title, $excerpt, $now, $now, $guid, $existingId );
+			$updateStmt->bind_param( 'ssssssssi', $now, $now, $content, $title, $excerpt, $now, $now, $guid, $existingId );
 			$updateStmt->execute();
 			$postId = $existingId;
 		} else {
