@@ -172,33 +172,24 @@ cd frontend-lite
 python server.py
 ```
 
-## Supporting Docs
+## Documentation
 
-### Release and scope
+### Start here
 
 - [Beta scope](docs/beta-scope.md)
 - [v0.2.0 release notes](docs/release-notes-v0.2.0.md)
-- [Current feature status](docs/current-feature-status.md)
-- [Core roadmap](docs/core-roadmap.md)
+- [Local development](docs/local-dev.md)
 
-### Validation and proof
+### Validation docs
 
-- [Repo screenshot plan](docs/repo-screenshot-plan.md)
 - [Route scenario matrix](docs/route-scenario-matrix.md)
 - [Gutenberg scenario matrix](docs/gutenberg-scenario-matrix.md)
 - [Preview scenario matrix](docs/preview-scenario-matrix.md)
 - [Packaging and install confidence](docs/packaging-install-confidence.md)
 
-### Onboarding and wiki
+### Wiki-ready docs
 
-- [First-time onboarding](docs/first-time-onboarding.md)
-- [Local development](docs/local-dev.md)
-- [Wiki plan](docs/wiki-plan.md)
-- [Wiki: What is Lenviqa](docs/wiki-what-is-pressbridge.md)
-- [Wiki: Quick start](docs/wiki-quick-start.md)
-- [Wiki: Supported beta scope](docs/wiki-supported-beta-scope.md)
-- [Wiki: Limitations and non-goals](docs/wiki-limitations-and-non-goals.md)
-
-### Release communication
-
-- [Public announcement drafts](docs/public-announcement-drafts-v0.2.0.md)
+- [What is Lenviqa](docs/wiki-what-is-pressbridge.md)
+- [Quick start](docs/wiki-quick-start.md)
+- [Supported beta scope](docs/wiki-supported-beta-scope.md)
+- [Limitations and non-goals](docs/wiki-limitations-and-non-goals.md)

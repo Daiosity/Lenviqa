@@ -588,7 +588,7 @@ function Footer({ site, menus, pages, posts }) {
         </ul>
         <div className="footer-contact">
           <span className="footer-link footer-link-strong">WordPress as CMS. React as frontend.</span>
-          <a className="footer-link footer-link-inline" href="https://github.com/Daiosity/PressBridge" target="_blank" rel="noreferrer">
+          <a className="footer-link footer-link-inline" href="https://github.com/Daiosity/Lenviqa" target="_blank" rel="noreferrer">
             <LinkedChainIcon />
             <span>View repository</span>
           </a>
