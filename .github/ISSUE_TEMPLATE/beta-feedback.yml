@@ -1,0 +1,50 @@
+name: Beta feedback
+description: Share onboarding friction, rough edges, or missing clarity from trying the beta.
+title: "[Beta feedback]: "
+labels:
+  - beta-feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for practical evaluation feedback: setup friction, confusing behavior, docs gaps, and places where the beta promise feels unclear.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What did you try?
+      description: Describe the workflow you were evaluating.
+      placeholder: I installed the plugin, pointed the starter at my local WordPress site, and tested route resolution and preview.
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: Where did the friction show up?
+      description: Call out the step, expectation gap, or unclear behavior.
+      placeholder: The preview setup path was not obvious, and I was unsure whether the failure was config-related or a core bug.
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Feedback type
+      options:
+        - Onboarding / setup
+        - Docs clarity
+        - Starter frontend UX
+        - Route behavior confidence
+        - Preview confidence
+        - Packaging / install confidence
+        - General beta experience
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-improvement
+    attributes:
+      label: What would have made this smoother?
+      description: Small, practical improvements are most useful here.
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Share anything that helps us understand the environment or expectations.

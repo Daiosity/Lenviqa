@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a reproducible Lenviqa core problem.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting this. Please focus on reproducible core issues around routing, preview, Gutenberg rendering, install/runtime behavior, or starter usage.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the actual problem and the expected behavior.
+      placeholder: When I resolve /sample-page/, the frontend renders an empty page instead of the published content.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Route resolution
+        - Preview flow
+        - Gutenberg rendering
+        - Packaging / install / activation
+        - Starter frontend
+        - Admin/settings
+        - Other core behavior
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Give the shortest reliable path to reproduce the problem.
+      placeholder: |
+        1. Activate the plugin
+        2. Set the frontend URL
+        3. Open /some-route/
+        4. See the failure
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Share the setup that matters for reproducing this.
+      placeholder: |
+        - WordPress version:
+        - PHP version:
+        - Lenviqa version:
+        - Frontend used (starter/frontend-lite/custom):
+        - Browser:
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant errors, screenshots, or payload details
+      description: Paste anything helpful here.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked the beta scope and this looks like a core regression rather than an unsupported ecosystem request.
+          required: true
+        - label: I can reproduce this with enough detail for someone else to follow.
+          required: true

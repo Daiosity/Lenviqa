@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Lenviqa beta scope
+    url: https://github.com/Daiosity/Lenviqa/blob/main/docs/beta-scope.md
+    about: Check the validated beta boundary before filing ecosystem-compatibility or parity requests.
+  - name: Lenviqa quick start
+    url: https://github.com/Daiosity/Lenviqa/wiki/Quick-Start
+    about: Use the quick start guide for install and local setup questions first.

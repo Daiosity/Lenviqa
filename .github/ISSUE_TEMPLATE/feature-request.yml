@@ -1,0 +1,50 @@
+name: Feature request
+description: Suggest a future improvement without treating it as current core behavior.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Lenviqa is currently scoped around a narrow validated beta core. Please frame requests as future direction, not as existing promised capability.
+  - type: textarea
+    id: request
+    attributes:
+      label: What do you want to see?
+      description: Describe the improvement clearly and practically.
+      placeholder: I would like a clearer structured-data path for custom field-heavy sites.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Focus on the underlying use case, not just the feature name.
+      placeholder: Right now I need to hand-map too much data before the frontend can use it cleanly.
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: How do you see this fitting?
+      options:
+        - Core improvement
+        - Advanced compatibility layer
+        - Starter/frontend experience
+        - Docs/tooling
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes or examples
+      description: Add context, examples, or tradeoffs worth considering.
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand this request may be intentionally out of scope for the current beta core.
+          required: true
