@@ -7,10 +7,11 @@ const runtimeConfig = (() => {
 })();
 
 const loadedConfig = runtimeConfig["../config/wp-config.json"]?.default || {};
-const API_BASE =
-  (import.meta.env.VITE_WTR_API_BASE || loadedConfig.apiBase || "__WTR_API_BASE__").replace(/\/$/, "");
+const configuredApiBase = import.meta.env.VITE_WTR_API_BASE || loadedConfig.apiBase || "";
+const API_BASE = String(configuredApiBase).trim().replace(/\/+$/, "");
 
 const CACHE_PREFIX = "Lenviqa:";
+const REQUEST_TIMEOUT_MS = 15000;
 const memoryCache = new Map();
 const SESSION_ROUTE_PATTERNS = [/^\/cart\/?$/i, /^\/checkout\/?$/i, /^\/my-account\/?$/i];
 
@@ -98,20 +99,42 @@ function isSessionSensitivePath(pathname = "") {
   return SESSION_ROUTE_PATTERNS.some((pattern) => pattern.test(pathname));
 }
 
+function requireApiBase() {
+  if (!API_BASE || API_BASE === "__WTR_API_BASE__") {
+    throw new Error(
+      "Lenviqa API is not configured. Set VITE_WTR_API_BASE or add apiBase to src/config/wp-config.json."
+    );
+  }
+
+  return API_BASE;
+}
+
 async function apiFetch(path) {
+  const apiBase = requireApiBase();
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   let response;
 
   try {
-    response = await fetch(`${API_BASE}${path}`, {
+    response = await fetch(`${apiBase}${path}`, {
       credentials: "include",
       headers: {
         Accept: "application/json"
-      }
+      },
+      signal: controller.signal
     });
   } catch (networkError) {
+    if (networkError?.name === "AbortError") {
+      throw new Error(
+        "The Lenviqa API request timed out. Confirm WordPress is running and the API base URL is reachable."
+      );
+    }
+
     throw new Error(
       "Unable to reach the Lenviqa API. Confirm WordPress is running, the plugin is active, and the API base URL is correct."
     );
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   if (!response.ok) {

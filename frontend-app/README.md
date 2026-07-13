@@ -21,7 +21,7 @@ This frontend expects the repo's Local WordPress site at `http://wp-to-react.loc
 
 ## Production hosting
 
-Use static hosting for MVP and configure rewrites so every frontend route falls back to `index.html`.
+For static hosting, configure rewrites so every frontend route falls back to `index.html`.
 
 ## What this starter includes
 

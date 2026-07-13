@@ -18,7 +18,7 @@ This starter was exported from the `__WTR_PLUGIN_NAME__` WordPress site.
 
 ## Production hosting
 
-Use static hosting for MVP and configure rewrites so every frontend route falls back to `index.html`.
+For static hosting, configure rewrites so every frontend route falls back to `index.html`.
 
 ## What this starter includes
 

@@ -63,20 +63,10 @@ function Assert-HttpError {
     }
 }
 
-function Assert-FileParity {
-    param(
-        [string]$Left,
-        [string]$Right
-    )
-
-    $leftHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $Left).Hash
-    $rightHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $Right).Hash
-
-    Assert-Condition ($leftHash -eq $rightHash) "Starter parity mismatch:`n$Left`n$Right"
-}
-
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $apiBase = ($WordPressBase.TrimEnd('/')) + '/wp-json/pressbridge/v1'
+
+& (Join-Path $projectRoot 'scripts\validate-static.ps1')
 
 Write-Host "Checking Lenviqa core endpoints..." -ForegroundColor Cyan
 
@@ -91,24 +81,6 @@ Assert-Condition ($null -ne $posts.items) 'Posts endpoint returned no items coll
 
 $resolvedHome = Invoke-Json "$apiBase/resolve?path=/"
 Assert-Condition (-not [string]::IsNullOrWhiteSpace($resolvedHome.route_type)) 'Resolve endpoint returned no route_type for home.'
-
-Write-Host "Checking starter parity..." -ForegroundColor Cyan
-
-$parityPairs = @(
-    @('frontend-app\src\App.jsx', 'assets\starter\src\App.jsx'),
-    @('frontend-app\src\styles.css', 'assets\starter\src\styles.css'),
-    @('frontend-app\src\lib\api.js', 'assets\starter\src\lib\api.js'),
-    @('frontend-app\src\blocks\BlockRenderer.jsx', 'assets\starter\src\blocks\BlockRenderer.jsx'),
-    @('frontend-app\src\blocks\renderers.jsx', 'assets\starter\src\blocks\renderers.jsx'),
-    @('frontend-app\src\blocks\utils.js', 'assets\starter\src\blocks\utils.js'),
-    @('frontend-app\index.html', 'assets\starter\index.html')
-)
-
-foreach ($pair in $parityPairs) {
-    Assert-FileParity `
-        -Left (Join-Path $projectRoot $pair[0]) `
-        -Right (Join-Path $projectRoot $pair[1])
-}
 
 Write-Host "Checking frontend availability..." -ForegroundColor Cyan
 

@@ -1,0 +1,45 @@
+name: Core validation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend-app/package-lock.json
+
+      - name: Validate PHP, metadata, and starter parity
+        shell: pwsh
+        run: ./scripts/validate-static.ps1
+
+      - name: Install frontend dependencies
+        working-directory: frontend-app
+        run: npm ci
+
+      - name: Build frontend starter
+        working-directory: frontend-app
+        run: npm run build
+
+      - name: Build and validate plugin package
+        shell: pwsh
+        run: ./scripts/validate-package.ps1

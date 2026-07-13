@@ -120,14 +120,19 @@ try {
     $result = & $phpBin -c $tempIni $runtimeScript $siteRoot 'lenviqa/pressbridge.php'
     Assert-Condition ($LASTEXITCODE -eq 0) "Runtime validator exited with code $LASTEXITCODE."
 
-    $jsonOutput = ($result | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) -join [Environment]::NewLine
-    Assert-Condition (-not [string]::IsNullOrWhiteSpace($jsonOutput)) 'Runtime validator returned no JSON output.'
+    $runtimeOutput = ($result | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) -join [Environment]::NewLine
+    $jsonMatch = [regex]::Match(
+        $runtimeOutput,
+        'LENVIQA_VALIDATION_JSON_BEGIN\s*(?<json>\{.*\})\s*LENVIQA_VALIDATION_JSON_END',
+        [System.Text.RegularExpressions.RegexOptions]::Singleline
+    )
+    Assert-Condition $jsonMatch.Success "Runtime validator returned no structured result. Output:`n$runtimeOutput"
 
-    $parsed = $jsonOutput | ConvertFrom-Json
+    $parsed = $jsonMatch.Groups['json'].Value | ConvertFrom-Json
     Assert-Condition ($parsed.plugin -eq 'lenviqa/pressbridge.php') "Runtime validator returned unexpected plugin slug '$($parsed.plugin)'."
     Assert-Condition ($parsed.uninstall_cleanup -eq $true) 'Runtime validator did not confirm uninstall cleanup.'
 
-    $result | Write-Output
+    $jsonMatch.Groups['json'].Value | Write-Output
 }
 finally {
     Set-Content -LiteralPath $wpConfigPath -Value $originalWpConfig -Encoding ASCII

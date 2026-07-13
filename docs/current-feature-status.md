@@ -17,7 +17,7 @@ The current product model is:
 - the plugin owns the bridge layer
 - React owns the public presentation layer
 
-Lenviqa is currently in a real alpha. It is beyond prototype, but it is not yet production-ready core.
+Lenviqa is currently in public beta. Its validated core is beyond prototype, but it is not yet a production-ready compatibility layer for the wider WordPress ecosystem.
 
 ## What Lenviqa core can do today
 
@@ -119,22 +119,19 @@ This is the practical changelog state reflected in the repo right now.
 
 ## Current roadmap position
 
-Lenviqa core is currently between:
+Lenviqa core is currently a validation-backed beta with explicit boundaries.
 
-- core alpha with real working bridge behavior
-- and beta-ready core with clearer guarantees
-
-The roadmap is defined in [docs/core-roadmap.md](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\docs\core-roadmap.md).
+The roadmap is defined in [Core roadmap](core-roadmap.md).
 
 ### What is complete in the current roadmap
 
-- the core alpha product story is clear
+- the core beta product story is clear
 - the starter is generic again
 - the smoke frontend is usable again
 - advanced compatibility routes are now labeled more honestly in the starter
 - release and smoke docs are aligned with the current product direction
 
-### What is still ahead before beta-ready core
+### What is still ahead before production confidence
 
 - more rendering hardening on common Gutenberg layouts
 - stronger route edge-case confidence
@@ -180,4 +177,4 @@ The current premium direction is:
 
 ## Current status in one line
 
-Lenviqa core is now a credible alpha bridge product with a generic starter and working preview, routing, and handoff behavior, but it still needs beta-level hardening before premium compatibility layers should become the main focus.
+Lenviqa core is now a credible beta bridge with a generic starter and validated preview, routing, rendering, packaging, and handoff guardrails. Production claims still require broader environment and browser coverage.

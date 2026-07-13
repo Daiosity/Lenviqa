@@ -1,10 +1,10 @@
 === Lenviqa ===
-Contributors: codex
+Contributors: daiosity
 Tags: headless, react, rest-api, frontend, decoupled
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Connect WordPress to modern frontends.
 
 Lenviqa turns a normal WordPress site into a headless-ready backend without breaking the editing experience.
 
-This MVP plugin focuses on a practical bridge:
+This beta plugin focuses on a practical bridge:
 
 * Keep WordPress admin, pages, posts, menus, and public post types
 * Expose a cleaner REST namespace for frontend consumption
@@ -23,9 +23,9 @@ This MVP plugin focuses on a practical bridge:
 * Generate signed preview links for React frontends
 * Export a starter React app with route resolution and preview support
 
-The plugin is designed to be maintainable now and extensible later for premium features such as ACF, WooCommerce, auth bridging, deployment helpers, and SSR presets.
+The plugin is designed to keep its core bridge small and maintainable. Advanced integrations remain outside the current beta promise.
 
-This is an alpha-stage bridge plugin. It is intentionally conservative:
+This is a beta-stage bridge plugin. It is intentionally conservative:
 
 * WordPress remains the editorial system
 * wp-admin and editor workflows remain protected
@@ -70,7 +70,7 @@ No. The plugin is intentionally conservative. It does not redirect `wp-admin`, l
 
 = Does this require GraphQL? =
 
-No. The MVP uses the native WordPress REST API and a custom namespace optimized for React-friendly responses.
+No. The beta uses the native WordPress REST API and a custom namespace optimized for React-friendly responses.
 
 = Can I use this with custom post types? =
 
@@ -78,17 +78,25 @@ Yes. Public post types are exposed through the generic `items` and `content` rou
 
 = Does preview work on a separate frontend domain? =
 
-Yes. Preview links use signed temporary tokens so a React frontend can request preview content directly from WordPress.
+Signed temporary tokens provide the preview foundation. Cross-domain browser behavior still depends on correct frontend URL and environment configuration.
 
 = Is the React starter meant to match my active WordPress theme exactly? =
 
 No. Lenviqa translates WordPress-managed content and block structure into a React frontend. It aims for coherent layout translation, not pixel-perfect theme cloning.
 
-= Does this support WooCommerce or ACF yet? =
+= Does this support WooCommerce, ACF, or page builders? =
 
-Not in the MVP. The architecture is built so those can be added later without rewriting the bridge.
+Not as part of the validated beta core. Theme parity, third-party block ecosystems, and interactive blocks that require WordPress frontend JavaScript are also outside the current promise.
 
 == Changelog ==
+
+= 0.3.0 =
+
+* Added clear frontend configuration errors and timeouts for stalled API requests
+* Added repeatable static validation for PHP syntax, release metadata, and starter parity
+* Added GitHub Actions validation for the frontend build and plugin package
+* Refreshed the frontend lockfile to resolve known dependency advisories
+* Aligned release metadata and documented the validated beta boundary
 
 = 0.2.0 =
 

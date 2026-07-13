@@ -13,7 +13,7 @@ This repo is for developers evaluating a practical WordPress-to-React bridge, no
 
 ## Beta Status
 
-Lenviqa is currently released as a beta core.
+Lenviqa `v0.3.0` is a beta-core release focused on predictable setup, clear failure behavior, and repeatable validation.
 
 That means the current public promise is limited to the validated core scope:
 
@@ -22,7 +22,7 @@ That means the current public promise is limited to the validated core scope:
 - preview guardrails
 - packaging/install/runtime validation
 
-See [Beta scope](docs/beta-scope.md) for the validated boundary and [v0.2.0 release notes](docs/release-notes-v0.2.0.md) for the first beta release notes.
+See [Beta scope](docs/beta-scope.md) for the validated boundary and [v0.3.0 release notes](docs/release-notes-v0.3.0.md) for this release.
 
 ## Who This Is For
 
@@ -177,7 +177,7 @@ python server.py
 ### Start here
 
 - [Beta scope](docs/beta-scope.md)
-- [v0.2.0 release notes](docs/release-notes-v0.2.0.md)
+- [v0.3.0 release notes](docs/release-notes-v0.3.0.md)
 - [Local development](docs/local-dev.md)
 
 ### Validation docs

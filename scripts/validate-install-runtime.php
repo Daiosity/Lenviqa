@@ -117,6 +117,7 @@ try {
 		}
 	}
 
+	echo "LENVIQA_VALIDATION_JSON_BEGIN\n";
 	echo wp_json_encode(
 		array(
 			'plugin'             => $plugin_slug,
@@ -128,6 +129,7 @@ try {
 		),
 		JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
 	) . PHP_EOL;
+	echo "LENVIQA_VALIDATION_JSON_END\n";
 } catch ( Throwable $exception ) {
 	if ( '__missing__' !== $original_settings ) {
 		update_option( 'wtr_settings', $original_settings );

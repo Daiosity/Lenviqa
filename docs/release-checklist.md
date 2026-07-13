@@ -4,17 +4,18 @@ Use this checklist before shipping a plugin ZIP to anyone else.
 
 ## Packaging
 
-1. Run `powershell -ExecutionPolicy Bypass -File .\scripts\build-plugin.ps1`
-2. Confirm `build/lenviqa-0.2.0.zip` exists.
-3. Confirm the ZIP contains only:
+1. Run `powershell -ExecutionPolicy Bypass -File .\scripts\validate-static.ps1`.
+2. Run `powershell -ExecutionPolicy Bypass -File .\scripts\validate-package.ps1`.
+3. Confirm the versioned `build/lenviqa-<version>.zip` exists.
+4. Confirm the ZIP contains only:
    - `pressbridge.php`
    - `readme.txt`
    - `uninstall.php`
    - `assets`
    - `includes`
    - `templates`
-4. Confirm the repo-level `README.md` still matches the current alpha behavior and local dev flow.
-5. Confirm no local-only directories were packaged, including:
+5. Confirm the repo-level `README.md` still matches the validated beta behavior and local dev flow.
+6. Confirm no local-only directories were packaged, including:
    - `frontend-app`
    - `frontend-lite`
    - `live-test-website`
@@ -45,9 +46,9 @@ Use this checklist before shipping a plugin ZIP to anyone else.
 1. Deactivate and uninstall the plugin.
 2. Confirm the `wtr_settings` option is removed.
 
-## Alpha review gate
+## Beta review gate
 
-Before calling the build "alpha-ready", confirm:
+Before calling the build "beta-ready", confirm:
 
 1. The plugin still behaves conservatively:
    - `wp-admin` untouched

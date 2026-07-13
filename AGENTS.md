@@ -215,7 +215,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\build-plugin.ps1
 
 Expected output:
 
-- [build/lenviqa-0.2.0.zip](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\build\lenviqa-0.2.0.zip)
+- [build/lenviqa-0.3.0.zip](C:\Users\Christo\Documents\WordPress Plugin Development\WP to React\build\lenviqa-0.3.0.zip)
 
 ### PHP syntax checks
 
@@ -294,7 +294,7 @@ Also do not break:
 
 A change is not done until all of the following are true:
 
-1. The change is scoped and MVP-safe.
+1. The change is scoped and beta-safe.
 2. The plugin PHP files lint clean.
 3. If packaging-related files changed, the plugin ZIP rebuilds successfully.
 4. If frontend behavior changed, the affected frontend variant is updated consistently:
@@ -306,7 +306,7 @@ A change is not done until all of the following are true:
 7. Any new admin-facing behavior has proper capabilities, sanitization, escaping, and nonce handling where applicable.
 8. Docs are updated if the local workflow, packaging, or expected behavior changed.
 
-For repo work that affects alpha and release quality, done should usually also include:
+For repo work that affects beta and release quality, done should usually also include:
 
 - a quick smoke check against the Local WordPress site
 - a note about remaining risks if something could not be verified end to end

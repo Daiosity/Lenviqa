@@ -5,6 +5,7 @@ const SITE_TITLE = "Lenviqa";
 const SITE_TAGLINE = "Connect WordPress to modern frontends.";
 const DEFAULT_API_BASE = "http://wp-to-react.local/wp-json/pressbridge/v1";
 const CACHE_PREFIX = "Lenviqa-lite:";
+const REQUEST_TIMEOUT_MS = 15000;
 const memoryCache = new Map();
 const SESSION_ROUTE_PATTERNS = [/^\/cart\/?$/i, /^\/checkout\/?$/i, /^\/my-account\/?$/i];
 
@@ -22,12 +23,24 @@ function getApiBase() {
   const fromQuery = params.get("apiBase");
 
   if (fromQuery) {
-    window.sessionStorage.setItem(`${CACHE_PREFIX}apiBase`, fromQuery.replace(/\/$/, ""));
-    return fromQuery.replace(/\/$/, "");
+    const normalized = fromQuery.trim().replace(/\/+$/, "");
+
+    if (!normalized) {
+      throw new Error("Lenviqa API is not configured. Provide a valid apiBase query parameter.");
+    }
+
+    window.sessionStorage.setItem(`${CACHE_PREFIX}apiBase`, normalized);
+    return normalized;
   }
 
   const stored = window.sessionStorage.getItem(`${CACHE_PREFIX}apiBase`);
-  return (stored || DEFAULT_API_BASE).replace(/\/$/, "");
+  const apiBase = String(stored || DEFAULT_API_BASE).trim().replace(/\/+$/, "");
+
+  if (!apiBase) {
+    throw new Error("Lenviqa API is not configured. Provide an apiBase query parameter.");
+  }
+
+  return apiBase;
 }
 
 function buildCacheKey(key) {
@@ -81,6 +94,8 @@ function isSessionSensitivePath(pathname = "") {
 
 async function apiFetch(path) {
   const apiBase = getApiBase();
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   let response;
 
   try {
@@ -88,12 +103,21 @@ async function apiFetch(path) {
       credentials: "include",
       headers: {
         Accept: "application/json"
-      }
+      },
+      signal: controller.signal
     });
   } catch (networkError) {
+    if (networkError?.name === "AbortError") {
+      throw new Error(
+        "The Lenviqa API request timed out. Confirm WordPress is running and the API base URL is reachable."
+      );
+    }
+
     throw new Error(
       "Unable to reach the Lenviqa API. Confirm WordPress is running, the plugin is active, and the API base URL is correct."
     );
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   if (!response.ok) {

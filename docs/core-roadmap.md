@@ -4,7 +4,7 @@ This document defines what Lenviqa core needs to do well before premium compatib
 
 ## Current status
 
-Lenviqa core is in a real alpha.
+Lenviqa core is in public beta with a deliberately limited, validated scope.
 
 What is already strong:
 
@@ -16,11 +16,11 @@ What is already strong:
 - the smoke frontend is usable again
 - Gutenberg-aware rendering is meaningfully better than the earliest prototype
 
-What is not production-ready yet:
+What still prevents a production-ready claim:
 
 - common real-world content still needs more rendering hardening
 - starter, smoke frontend, and exported starter need ongoing alignment checks
-- beta boundaries are not formalized enough
+- browser-level cross-domain preview behavior remains environment-dependent
 - compatibility-heavy routes need clearer expectations in the UI and docs
 - smoke coverage is still too manual
 
